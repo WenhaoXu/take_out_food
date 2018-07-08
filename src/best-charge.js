@@ -2,12 +2,28 @@
 
 const {items} = require('./items');
 const {promotions} = require('./promotions');
-
+var trim = require('lodash.trim');
 
 function bestCharge(selectedItems) {
-  return /*TODO*/;
+  format(selectedItems);
+}
+
+
+function format(selectedItems){ 
+ return selectedItems.map(item=>{
+  return item={
+      id: trim(item.split('x')[0]),
+      number: parseInt(trim(item.split('x')[1]))
+   };
+  })
+  
+     
+    
+ 
+ 
 }
 
 module.exports={
-  bestCharge
+  bestCharge,
+  format
  }
