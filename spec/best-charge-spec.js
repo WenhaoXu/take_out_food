@@ -2,7 +2,7 @@
 
 const {loadAllItems} = require('../src/items');
 const {loadPromotions} = require('../src/promotions');
-const {bestCharge,format,getItemDetails} =require('../src/best-charge');
+const {bestCharge,format,getItemDetails,countOrderItem} =require('../src/best-charge');
 var trim = require('lodash.trim');
 
 
@@ -28,7 +28,19 @@ describe('test getItemDetails function',function(){
   });
   });
 
-
+  describe('test countOrderItem function',function(){
+    it ('should have same orderDeatil',function(){
+      let inputs = [{id:'ITEM0001',number:1,name: '黄焖鸡',price: 18.00},
+      {id:'ITEM0013',number:2, name: '肉夹馍',price: 6.00},
+      {id:'ITEM0022',number:1,name: '凉皮',price: 8.00}];
+      let summary =countOrderItem(inputs);
+      let expected=[{id:'ITEM0001',number:1,name: '黄焖鸡',price: 18.00, count:18},
+                    {id:'ITEM0013',number:2, name: '肉夹馍',price: 6.00,count :12},
+                    {id:'ITEM0022',number:1,name: '凉皮',price: 8.00,count :8}];
+      expect(summary).toEqual(expected)
+    });
+    });
+  
 
 
 

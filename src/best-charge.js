@@ -3,11 +3,11 @@
 const {loadAllItems} = require('./items');
 const {promotions} = require('./promotions');
 var trim = require('lodash.trim');
-var map = require('lodash.map');
 
 function bestCharge(selectedItems) {
  let typeAndNumberOfOrders = format(selectedItems);
  let orderDetails=getItemDetails(typeAndNumberOfOrders,loadAllItems());
+ orderDetails=countOrderItem(orderDetails);
 }
 
 
@@ -32,9 +32,18 @@ function  getItemDetails(typeAndNumberOfOrders,items){
 
  }
 
+function countOrderItem(orderDetails){
+  orderDetails.map(orderDetail=>{
+    let mycount;
+      mycount = orderDetail.number * orderDetail.price;
+      orderDetail.count = mycount;
+  })
+  return orderDetails;
+}
 
 module.exports={
   bestCharge,
   format,
-  getItemDetails
+  getItemDetails,
+  countOrderItem
  }
