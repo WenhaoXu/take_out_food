@@ -1,9 +1,10 @@
 'use strict';
 
-const {items} = require('../src/items');
-const {promotions} = require('../src/promotions');
-const {bestCharge,format} =require('../src/best-charge');
+const {loadAllItems} = require('../src/items');
+const {loadPromotions} = require('../src/promotions');
+const {bestCharge,format,getItemDetails} =require('../src/best-charge');
 var trim = require('lodash.trim');
+
 
 
 describe('test format function',function(){
@@ -16,7 +17,16 @@ it ('should have same type and number',function(){
 });
 
 
-
+describe('test getItemDetails function',function(){
+  it ('should have same orderDeatil',function(){
+    let inputs = [{id:'ITEM0001',number:1},{id:'ITEM0013',number:2},{id:'ITEM0022',number:1}];
+    let summary =getItemDetails(inputs,loadAllItems());
+    let expected=[{id:'ITEM0001',number:1,name: '黄焖鸡',price: 18.00},
+                  {id:'ITEM0013',number:2, name: '肉夹馍',price: 6.00},
+                  {id:'ITEM0022',number:1,name: '凉皮',price: 8.00}];
+    expect(summary).toEqual(expected)
+  });
+  });
 
 
 
