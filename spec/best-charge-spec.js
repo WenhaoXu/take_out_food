@@ -2,7 +2,7 @@
 
 const {loadAllItems} = require('../src/items');
 const {loadPromotions} = require('../src/promotions');
-const {bestCharge,format,getItemDetails,countOrderItem} =require('../src/best-charge');
+const {bestCharge,format,getItemDetails,countOrderItem,getTypeAndNumberOfSaved} =require('../src/best-charge');
 var trim = require('lodash.trim');
 
 
@@ -42,7 +42,23 @@ describe('test getItemDetails function',function(){
     });
   
 
-
+    describe('test getTypeAndNumberOfSaved function',function(){
+      it ('should have same value',function(){
+        let inputs = [{id:'ITEM0001',number:1,name: '黄焖鸡',price: 18.00, count:18},
+        {id:'ITEM0013',number:2, name: '肉夹馍',price: 6.00,count :12},
+        {id:'ITEM0022',number:1,name: '凉皮',price: 8.00,count :8}];
+        let summary=0;
+        summary =getTypeAndNumberOfSaved(inputs,loadPromotions());
+        let expected=[{
+          type:'满30减6元',
+          saved: 6
+        },{
+          type:'指定菜品半价',
+            saved:13
+        }]
+        expect(summary).toEqual(expected)
+      });
+      });
 
 
 
