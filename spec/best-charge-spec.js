@@ -50,11 +50,9 @@ describe('test getItemDetails function',function(){
         let summary=0;
         summary =getTypeAndNumberOfSaved(inputs,loadPromotions());
         let expected=[{
-          type:'满30减6元',
-          saved: 6
-        },{
           type:'指定菜品半价',
-            saved:13
+            saved:13,
+            savedNames:'黄焖鸡，凉皮，'
         }]
         expect(summary).toEqual(expected)
       });
